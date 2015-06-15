@@ -1,5 +1,5 @@
-
-
+//root -l analyze_systematics.C+
+//
 #include <memory>
 #include <string>
 #include <vector>
@@ -71,7 +71,8 @@ vector<string> analyzeVariable(int mode, bool RCP = 0){
    bool castorBins11 = 0;
    bool bjetBins3 = 0;
    bool newBins4 = 0;
-   bool atlasSpectrBins8 = 1;
+   bool atlasSpectrBins8 = 0;
+   bool D0RcpBins4 = 1;
 
    double sigmaNN = 64;
 
@@ -378,6 +379,18 @@ vector<string> analyzeVariable(int mode, bool RCP = 0){
       bins.push_back(b6);
       bins.push_back(b7);
 
+   }else if(D0RcpBins4){
+
+      for(int i = 0; i < 4; ++i) b0.push_back(i);
+      for(int i = 4; i < 12; ++i) b1.push_back(i);
+      for(int i = 12; i < 20; ++i) b2.push_back(i);
+      for(int i = 20; i < 40; ++i) b3.push_back(i);
+
+      bins.push_back(b0);
+      bins.push_back(b1);
+      bins.push_back(b2);
+      bins.push_back(b3);
+
    }else{
 
    for(int i = 0; i < 4; ++i) b0.push_back(i);
@@ -602,6 +615,7 @@ vector<string> analyzeVariable(int mode, bool RCP = 0){
 
       //cout<<Ncoll[t]<<"$\\pm$ "<<errors[t]*Ncoll[t]<<" &"<<endl;
       if(mode==3) txtNcoll.push_back(Form("%0.4f$\\pm$%0.4f(%0.1f\\%%) & %0.4f &",Ncoll[t],errors[t]*Ncoll[t],errors[t]*100.,Rms[t]));
+      if(mode==2 && RCP==1) txtNcoll.push_back(Form("%0.2f +/- %0.2f  %0.1f\%%  %0.2f ",Ncoll[t]/Ncoll[bins.size()-1],errors[t]*Ncoll[t]/Ncoll[bins.size()-1],errors[t]*100.,Rms[t]));
       else{
 	 //if(mode < 30) txtNcoll.push_back(Form("%0.2f$\\pm$%0.2f(%0.1f\\%%) & %0.2f &",Ncoll[t],errors[t]*Ncoll[t],errors[t]*100.,Rms[t]));
          if(mode < 30) txtNcoll.push_back(Form("%0.2f +/- %0.2f  %0.1f\%%  %0.2f ",Ncoll[t],errors[t]*Ncoll[t],errors[t]*100.,Rms[t]));
@@ -875,6 +889,14 @@ void analyze_systematics(){
       "60 - 80\\% & "
    };
 
+   string cLabelD0Rcp4[40] = {
+      "0 - 10\%  ",
+      "10 - 30\%  ",
+      "30 - 50\%  ",
+      "50 - 100\%  "
+   };
+
+
 
    vector<string> st0,st1,st2,st3,st4,st5,st6,st7,st8,st9,st10,st11;
 
@@ -904,7 +926,8 @@ void analyze_systematics(){
    bool bjet3 = 0;
    bool new4 = 0;
    bool speB = 0;
-   bool atlasSpectra8 = 1;
+   bool atlasSpectra8 = 0;
+   bool D0Rcp4 = 1;
    
 
    if(a) cout<<"b Mean "<<"b RMS "<<"Npart Mean "<<"Npart RMS "<<"Ncoll Mean "<<"Ncoll RMS"<<endl;
@@ -924,6 +947,7 @@ void analyze_systematics(){
    //if(speB) cout<<"Npart_Mean "<<"Npart_RMS "<<"b_Mean "<<"b_RMS"<<endl;
    if(speB) cout<<"Centrality range   ||       <Ncoll> "<<" RMSncoll "<<"       ||         <T_AB> "<<"RMStaa "<<"         ||     <Npart>   RMSnpart"<<endl;
    if(atlasSpectra8) cout<<"Centrality range   ||       <Ncoll> "<<" RMSncoll "<<"       ||         <T_AB> "<<"RMStaa "<<"         ||     <Npart>   RMSnpart"<<endl;
+   if(D0Rcp4) cout<<"Centrality range   ||       <Ncoll> "<<" RMSncoll "<<"       ||         <T_AB> "<<"RMStaa "<<"         ||     <Npart>   RMSnpart"<<endl;
 
       for(int i = 0; i < st0.size(); ++i){
 //	 cout<<"\\hline"<<endl;
@@ -944,8 +968,9 @@ void analyze_systematics(){
          if(bjet3) cout<<cLabelbjet3[i]<<st0[i]<<st2[i]<<endl;
          //if(new4) cout<<cLabelnew4[i]<<st0[i]<<st2[i]<<endl;
          if(new4) cout<<cLabelnew4[i]<<"\t"<<st0[i]<<"\t"<<st4[i]<<endl;
-         //if(speB) cout<<cLabelSpectraB[i]<<"  ||  "<<st1[i]<<"  ||  "<<st2[i]<<"  ||  "<<st0[i]<<endl;
+         if(speB) cout<<cLabelSpectraB[i]<<"  ||  "<<st1[i]<<"  ||  "<<st2[i]<<"  ||  "<<st0[i]<<endl;
          if(atlasSpectra8) cout<<cLabelatlasSpectra8[i]<<"  ||  "<<st1[i]<<"  ||  "<<st2[i]<<"  ||  "<<st0[i]<<endl;
+         if(cLabelD0Rcp4) cout<<cLabelD0Rcp4[i]<<"  ||  "<<st1[i]<<"  ||  "<<st2[i]<<"  ||  "<<st0[i]<<endl;
       }
       for(int i = 0; i < st0.size(); ++i){
 //         cout<<"\\hline"<<endl;
