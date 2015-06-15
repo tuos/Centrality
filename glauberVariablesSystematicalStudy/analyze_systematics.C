@@ -62,7 +62,7 @@ vector<string> analyzeVariable(int mode, bool RCP = 0){
    bool jetBins = 0;
    bool dNdetaBins = 0;
    bool spectraBinsA = 0 && 0 && 0;
-   bool spectraBinsB = 1;
+   bool spectraBinsB = 0;
    bool photonBins = 0;
    bool quarkoniaBins = 0;
    bool jpsiBins = 0;
@@ -71,6 +71,7 @@ vector<string> analyzeVariable(int mode, bool RCP = 0){
    bool castorBins11 = 0;
    bool bjetBins3 = 0;
    bool newBins4 = 0;
+   bool atlasSpectrBins8 = 1;
 
    double sigmaNN = 64;
 
@@ -358,6 +359,25 @@ vector<string> analyzeVariable(int mode, bool RCP = 0){
       bins.push_back(b2);
       bins.push_back(b3);
 
+   }else if(atlasSpectrBins8){
+      for(int i = 0; i < 2; ++i) b0.push_back(i);
+      for(int i = 2; i < 4; ++i) b1.push_back(i);
+      for(int i = 4; i < 8; ++i) b2.push_back(i);
+      for(int i = 8; i < 12; ++i) b3.push_back(i);
+      for(int i = 12; i < 16; ++i) b4.push_back(i);
+      for(int i = 16; i < 20; ++i) b5.push_back(i);
+      for(int i = 20; i < 24; ++i) b6.push_back(i);
+      for(int i = 24; i < 32; ++i) b7.push_back(i);
+
+      bins.push_back(b0);
+      bins.push_back(b1);
+      bins.push_back(b2);
+      bins.push_back(b3);
+      bins.push_back(b4);
+      bins.push_back(b5);
+      bins.push_back(b6);
+      bins.push_back(b7);
+
    }else{
 
    for(int i = 0; i < 4; ++i) b0.push_back(i);
@@ -507,7 +527,7 @@ vector<string> analyzeVariable(int mode, bool RCP = 0){
       if(i == 20) sigmaNN = 59;
       if(i == 21) sigmaNN = 69;
 
-      cout<<"Analyzing variation : "<<names[i].data()<<endl;
+      //cout<<"Analyzing variation : "<<names[i].data()<<endl;
       table[i] = (CentralityBins*)inf->Get(Form("%s/run1",tags[i].data()));
       
       double ncoll[20] ={0,0,0,0,0,0,0,0,0,0,0,0};
@@ -562,7 +582,7 @@ vector<string> analyzeVariable(int mode, bool RCP = 0){
 	 rms[t] = sqrt(rmsSq[t] + mSq[t] - ncoll[t]*ncoll[t]);
       }
   
-        cout<<"Results : "<<ncoll[0]<<endl;
+        //cout<<"Results : "<<ncoll[0]<<endl;
 
 	for(int t = 0; t < bins.size(); ++t){
 	   var[t][i] = ((ncoll[t])-(Ncoll[t]))/Ncoll[t];
@@ -573,14 +593,14 @@ vector<string> analyzeVariable(int mode, bool RCP = 0){
 
 
    for(int t = 0; t < bins.size(); ++t){
-      cout<<"Large Bin : "<<t<<endl;
+      //cout<<"Large Bin : "<<t<<endl;
 
       if(RCP) errors[t] = printError(varcp[t],0.0005);
       else errors[t] = printError(var[t],0.0005);
 
       errorsRMS[t] = printError(varms[t],0.0005);
 
-      cout<<Ncoll[t]<<"$\\pm$ "<<errors[t]*Ncoll[t]<<" &"<<endl;
+      //cout<<Ncoll[t]<<"$\\pm$ "<<errors[t]*Ncoll[t]<<" &"<<endl;
       if(mode==3) txtNcoll.push_back(Form("%0.4f$\\pm$%0.4f(%0.1f\\%%) & %0.4f &",Ncoll[t],errors[t]*Ncoll[t],errors[t]*100.,Rms[t]));
       else{
 	 //if(mode < 30) txtNcoll.push_back(Form("%0.2f$\\pm$%0.2f(%0.1f\\%%) & %0.2f &",Ncoll[t],errors[t]*Ncoll[t],errors[t]*100.,Rms[t]));
@@ -589,10 +609,10 @@ vector<string> analyzeVariable(int mode, bool RCP = 0){
       }
   }
 
-   cout<<"0 - 10% / 30 -100%"<<endl;
-   printError(varcp2);
+   //cout<<"0 - 10% / 30 -100%"<<endl;
+   //printError(varcp2);
 
-   cout<<"Custom Calculations : "<<endl;
+   //cout<<"Custom Calculations : "<<endl;
    if(0){
       double a[100] = {0.2,   7.4,   0.36,   2.7,   3 };
       cout<<addQuad(a,5)<<endl;
@@ -648,7 +668,7 @@ double printError(double *var0, double uncSmear, int uncEff, double nom){
       cout<<"Final Error   : "<<error0/nom*100<<endl;
    }
 
-   cout<<Form("%0.2f\\%% & %0.2f\\%% &%0.2f\\%% &%0.2f\\%% &%0.2f\\%% &%0.2f\\%% &%0.2f\\%% \\\\",errorSigmaNN/nom*100,errorR/nom*100,errorSkin/nom*100,errorDmin/nom*100,glauberError0/nom*100,effError/nom*100,error0/nom*100)<<endl;
+   //cout<<Form("%0.2f\\%% & %0.2f\\%% &%0.2f\\%% &%0.2f\\%% &%0.2f\\%% &%0.2f\\%% &%0.2f\\%% \\\\",errorSigmaNN/nom*100,errorR/nom*100,errorSkin/nom*100,errorDmin/nom*100,glauberError0/nom*100,effError/nom*100,error0/nom*100)<<endl;
 
    //   return effError;
    //   return glauberError0;
@@ -844,11 +864,22 @@ void analyze_systematics(){
       "30 - 50\%  "
    };
 
+   string cLabelatlasSpectra8[40] = {
+      "0 - 5\\% & ",
+      "5 - 10\\% & ",
+      "10 - 20\\% & ",
+      "20 - 30\\% &",
+      "30 - 40\\% &",
+      "40 - 50\\% & ",
+      "50 - 60\\% &",
+      "60 - 80\\% & "
+   };
+
 
    vector<string> st0,st1,st2,st3,st4,st5,st6,st7,st8,st9,st10,st11;
 
-   //bool RCP = 0;
-   bool RCP = 1;
+   bool RCP = 0;
+   //bool RCP = 1;
 
    st0 = analyzeVariable(0,RCP); // Npart
    if(1){
@@ -872,7 +903,8 @@ void analyze_systematics(){
    bool ca11 = 0;
    bool bjet3 = 0;
    bool new4 = 0;
-   bool speB = 1;
+   bool speB = 0;
+   bool atlasSpectra8 = 1;
    
 
    if(a) cout<<"b Mean "<<"b RMS "<<"Npart Mean "<<"Npart RMS "<<"Ncoll Mean "<<"Ncoll RMS"<<endl;
@@ -890,7 +922,8 @@ void analyze_systematics(){
    if(new4) cout<<"Npart_Mean "<<"Npart_RMS "<<"T_AB_Mean "<<"T_AB_RMS"<<endl;
    if(new4) cout<<"Npart_Mean "<<"Npart_RMS "<<"Ncoll_Mean "<<"Ncoll_RMS "<<endl;
    //if(speB) cout<<"Npart_Mean "<<"Npart_RMS "<<"b_Mean "<<"b_RMS"<<endl;
-   if(speB) cout<<"Centrality range  ||   <Ncoll> "<<" RMSncoll "<<" ||  <T_AB> "<<"RMStaa "<<" ||   <Npart>   RMSnpart"<<endl;
+   if(speB) cout<<"Centrality range   ||       <Ncoll> "<<" RMSncoll "<<"       ||         <T_AB> "<<"RMStaa "<<"         ||     <Npart>   RMSnpart"<<endl;
+   if(atlasSpectra8) cout<<"Centrality range   ||       <Ncoll> "<<" RMSncoll "<<"       ||         <T_AB> "<<"RMStaa "<<"         ||     <Npart>   RMSnpart"<<endl;
 
       for(int i = 0; i < st0.size(); ++i){
 //	 cout<<"\\hline"<<endl;
@@ -911,7 +944,8 @@ void analyze_systematics(){
          if(bjet3) cout<<cLabelbjet3[i]<<st0[i]<<st2[i]<<endl;
          //if(new4) cout<<cLabelnew4[i]<<st0[i]<<st2[i]<<endl;
          if(new4) cout<<cLabelnew4[i]<<"\t"<<st0[i]<<"\t"<<st4[i]<<endl;
-         if(speB) cout<<cLabelSpectraB[i]<<"  ||  "<<st1[i]<<"  ||  "<<st2[i]<<"  ||  "<<st0[i]<<endl;
+         //if(speB) cout<<cLabelSpectraB[i]<<"  ||  "<<st1[i]<<"  ||  "<<st2[i]<<"  ||  "<<st0[i]<<endl;
+         if(atlasSpectra8) cout<<cLabelatlasSpectra8[i]<<"  ||  "<<st1[i]<<"  ||  "<<st2[i]<<"  ||  "<<st0[i]<<endl;
       }
       for(int i = 0; i < st0.size(); ++i){
 //         cout<<"\\hline"<<endl;
