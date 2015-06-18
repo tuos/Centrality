@@ -43,16 +43,15 @@ void fitSlices(TH2 *hCorr, TF1 *func) {
 
 }
 
-void makeMCCentralityTable(int nbins = 200, const string label = "HFtowers", const char * tag = "CentralityTable_HFtowers_HydjetDrum5_v740x02_mc") {
+void makeMCCentralityTable(int nbins = 200, const string label = "HFtowers", const char * tag = "CentralityTable_HFtowers200_HydjetDrum5_v750x01_mc") {
 
   TH1::SetDefaultSumw2();
 
-  //TString inFileName = "/store/group/phys_heavyions/azsigmon/PbPb2015/eventtree_hydjet_740_d20150422.root";
-  TString inFileName = "/afs/cern.ch/user/t/tuos/work/public/PbPb/table/CMSSW_7_4_0_pre6/src/HeavyIonsAnalysis/CentralityAnalysis/tools/eventtree_hydjet_740_d20150422.root";
+  TString inFileName = "/afs/cern.ch/user/t/tuos/work/public/PbPb/table/cmssw750pre5/CMSSW_7_5_0_pre5/src/HeavyIonsAnalysis/CentralityAnalysis/tools/hiForest_HydjetMB5TeV75X_MC.root";
   TFile *inFile = TFile::Open(inFileName);
   TTree *t = (TTree*)inFile->Get("hiEvtAnalyzer/HiTree");
 
-  TString outFileName = "CentralityTable_HFtowers_HydjetDrum5_d20150616_v1.root";
+  TString outFileName = "CentralityTable_HFtowers200_HydjetDrum5_d20150617_v1.root";
   TFile * outFile = new TFile(outFileName,"recreate");
   TDirectory* dir = outFile->mkdir(tag);
   dir->cd();
@@ -62,14 +61,15 @@ void makeMCCentralityTable(int nbins = 200, const string label = "HFtowers", con
   CentralityBins * bins = new CentralityBins(Form("run%d",runNum), tag, nbins);
   bins->table_.reserve(nbins);
 
-  ofstream txtfile("output_d20150616.txt");
+  ofstream txtfile("output_d20150617MC.txt");
   txtfile << "Input tree: " << inFileName << endl;
 
   double binboundaries[nbins+1];
   vector<float> values;
 
   float b, hf, hfplus, hfpluseta4, hfminuseta4, hfminus, hfhit, ee, eb, zdc, zdcplus, zdcminus;
-  int run, lumi, npart, ncoll, nhard, npix, npixtrks, ntrks;
+  int run, lumi, npix, npixtrks, ntrks;
+  float npart, ncoll, nhard;
   t->SetBranchAddress("run",	&run);
   t->SetBranchAddress("lumi",	&lumi);
   t->SetBranchAddress("b",	&b);

@@ -6,7 +6,7 @@ ivars.register ('outputTag',
                 mult=ivars.multiplicity.singleton,
                 mytype=ivars.varType.string,
                 info="for testing")
-ivars.outputTag="CentralityTable_HFtowers_HydjetDrum5_v740x02_mc"
+ivars.outputTag="CentralityTable_HFtowers200_HydjetDrum5_v750x01_mc"
 
 ivars.register ('inputFile',
                 mult=ivars.multiplicity.singleton,
@@ -18,8 +18,8 @@ ivars.register ('outputFile',
                 mytype=ivars.varType.string,
                 info="for testing")
 
-ivars.inputFile="./CentralityTable_HFtowers_HydjetDrum5_d20150616_v1.root"
-ivars.outputFile="./CentralityTable_HFtowers_HydjetDrum5_d20150616_v1.db"
+ivars.inputFile="./CentralityTable_HFtowers200_HydjetDrum5_d20150617_v1.root"
+ivars.outputFile="./CentralityTable_HFtowers200_HydjetDrum5_d20150617_v1.db"
 
 ivars.parseArguments()
 
