@@ -1,4 +1,4 @@
-# 5.02 TeV Hydjet MB
+# 5.02 TeV Hydjet MB, CMSSW_7_5_0
 # 50 events for each centrality bin
 # comparing the timing and memory between HI reco and pp reco
 
