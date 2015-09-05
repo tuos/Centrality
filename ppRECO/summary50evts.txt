@@ -1,0 +1,18 @@
+# 5.02 TeV Hydjet MB
+# 50 events for each centrality bin
+# comparing the timing and memory between HI reco and pp reco
+
+centrality   HIreco_time(s)/event   ppreco_time(s)/event    HIreco_PeakVirtualMemory(MB)     ppreco_PeakVirtualMemory(MB)
+90-100%           1.63                   1.97                        1786.84                          1882.10
+80-90%            1.83                   2.53                        1798.34                          1765.85
+70-80%            2.55                   3.23                        1787.84                          1882.62
+60-70%            3.58                   5.61                        1819.09                          2029.63
+50-60%            5.83                   12.6                        1799.83                          1965.88
+40-50%            7.08                   27.4                        1978.09                          2368.38
+30-40%            11.9                   89.8                        2067.09                          2666.13
+20-30%            19.4                   26.6                        2367.84                          2799.17
+10-20%            37.2                   20.4                        2628.83                          2637.63
+0-10%             97.2                   34.8                        4346.34                          3246.91
+
+
+
