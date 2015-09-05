@@ -1,0 +1,6 @@
+
+grep "TimeReport> T" cent*/jo*
+
+grep "MemoryReport> Peak" cent*/jo*
+
+
