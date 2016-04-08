@@ -1,0 +1,56 @@
+[tuos@lxplus0059 test]$ cmsRun ConfFilePP_cfg.py 
+# Conditions read from  CMS_CONDITIONS  via FrontierProd 
+01-Apr-2016 16:39:46 CEST  Initiating request to open file file:/afs/cern.ch/user/t/tuos/work/public/run2015/pprereco/CMSSW_7_5_8_patch4/src/step3pp_FILTER_RAW2DIGI_L1Reco_RECO.root
+01-Apr-2016 16:39:48 CEST  Successfully opened file file:/afs/cern.ch/user/t/tuos/work/public/run2015/pprereco/CMSSW_7_5_8_patch4/src/step3pp_FILTER_RAW2DIGI_L1Reco_RECO.root
+Begin processing the 1st record. Run 263286, Event 24468035, LumiSection 262 at 01-Apr-2016 16:39:57.226 CEST
+%MSG-e GetByLabelWithoutRegistration:  AnalysisEnergyHF:demo  01-Apr-2016 16:39:57 CEST Run: 263286 Event: 24468035
+::getByLabel without corresponding call to consumes or mayConsumes for this module.
+  type: edm::SortedCollection<CaloTower,edm::StrictWeakOrdering<CaloTower> >
+  module label: towerMaker
+  product instance name: ''
+  process name: ''
+
+%MSG
+%MSG-e GetByLabelWithoutRegistration:  AnalysisEnergyHF:demo  01-Apr-2016 16:39:57 CEST Run: 263286 Event: 24468035
+::getByLabel without corresponding call to consumes or mayConsumes for this module.
+  type: edm::SortedCollection<HFRecHit,edm::StrictWeakOrdering<HFRecHit> >
+  module label: hfreco
+  product instance name: ''
+  process name: ''
+
+%MSG
+%MSG-e GetByLabelWithoutRegistration:  AnalysisEnergyHF:demo  01-Apr-2016 16:39:57 CEST Run: 263286 Event: 24468035
+::getByLabel without corresponding call to consumes or mayConsumes for this module.
+  type: std::vector<reco::Vertex>
+  module label: offlinePrimaryVertices
+  product instance name: ''
+  process name: ''
+
+%MSG
+Begin processing the 2nd record. Run 263286, Event 24473723, LumiSection 262 at 01-Apr-2016 16:39:57.259 CEST
+Begin processing the 3rd record. Run 263286, Event 24543830, LumiSection 262 at 01-Apr-2016 16:39:57.287 CEST
+Begin processing the 4th record. Run 263286, Event 24472382, LumiSection 262 at 01-Apr-2016 16:39:57.308 CEST
+Begin processing the 5th record. Run 263286, Event 24472352, LumiSection 262 at 01-Apr-2016 16:39:57.323 CEST
+01-Apr-2016 16:39:57 CEST  Closed file file:/afs/cern.ch/user/t/tuos/work/public/run2015/pprereco/CMSSW_7_5_8_patch4/src/step3pp_FILTER_RAW2DIGI_L1Reco_RECO.root
+
+=============================================
+
+MessageLogger Summary
+
+ type     category        sev    module        subroutine        count    total
+ ---- -------------------- -- ---------------- ----------------  -----    -----
+    1 GetByLabelWithoutReg -e AnalysisEnergyHF                       3        3
+    2 fileAction           -s file_close                             1        1
+    3 fileAction           -s file_open                              2        2
+
+ type    category    Examples: run/evt        run/evt          run/evt
+ ---- -------------------- ---------------- ---------------- ----------------
+    1 GetByLabelWithoutRegistration 263286/24468035  263286/24468035  263286/24468035
+    2 fileAction           PostEndRun                        
+    3 fileAction           pre-events       pre-events       
+
+Severity    # Occurrences   Total Occurrences
+--------    -------------   -----------------
+Error                   3                   3
+System                  3                   3
+[tuos@lxplus0059 test]$
