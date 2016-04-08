@@ -1,0 +1,22 @@
+
+PbPb:
+CMSSW_7_5_8_patch4
+[tuos@lxplus0059 src]$ cmsDriver.py step3HI  --process RECO  --repacked  --conditions 75X_dataRun2_PromptHI_v3 --scenario HeavyIons -s RAW2DIGI,L1Reco,RECO --datatier AOD --customise Configuration/DataProcessing/RecoTLR.customiseRun2CommonHI --data --eventcontent RECO --no_exec
+failed when doing cmsRun ...  "error: No module named RecoHI_EventContent_cff"
+[tuos@lxplus0059 src]$ curl -s --insecure https://raw.githubusercontent.com/cms-sw/cmssw/CMSSW_7_5_8_patch4/RecoHI/Configuration/python/RecoHI_EventContent_cff.py --retry 2 --create-dirs -o RecoHI/Configuration/python/RecoHI_EventContent_cff.py
+get another error when doing cmsRun xxx   "error: No module named Reconstruction_HI_cff"
+[tuos@lxplus005 src]$ curl -s --insecure https://raw.githubusercontent.com/cms-sw/cmssw/CMSSW_7_5_8_patch4/RecoHI/Configuration/python/Reconstruction_HI_cff.py --retry 2 --create-dirs -o RecoHI/Configuration/python/Reconstruction_HI_cff.py
+"error:Reconstruction_hiPF_cff"
+[tuos@lxplus005 src]$ curl -s --insecure https://raw.githubusercontent.com/cms-sw/cmssw/CMSSW_7_5_8_patch4/RecoHI/Configuration/python/Reconstruction_hiPF_cff.py --retry 2 --create-dirs -o RecoHI/Configuration/python/Reconstruction_hiPF_cff.py
+[tuos@lxplus005 src]$ cmsRun step3HI_RAW2DIGI_L1Reco_RECO.py 
+
+
+pp:
+CMSSW_7_5_8_patch4
+[tuos@lxplus0059 src]$ curl -s --insecure https://raw.githubusercontent.com/mandrenguyen/cmssw/customizePPrecoForHI75X/RecoHI/Configuration/python/customise_PPwithHI.py --retry 2 --create-dirs -o RecoHI/Configuration/python/customise_PPwithHI.py
+[tuos@lxplus0059 src]$ curl -s --insecure https://raw.githubusercontent.com/tuos/Centrality/master/ppRECO/ppreco2016/HI_PeripheralAllSkim_cff.py --retry 2 --create-dirs -o Configuration/Skimming/python/HI_PeripheralAllSkim_cff.py
+[tuos@lxplus0059 src]$ scram b
+[tuos@lxplus0059 src]$ cmsDriver.py step3pp --process ppRECO --repacked --conditions 75X_dataRun2_PromptHI_v3 -s FILTER:Configuration/Skimming/HI_PeripheralAllSkim_cff.periphAllHISkimSequence,RAW2DIGI,L1Reco,RECO --datatier AOD --customise Configuration/DataProcessing/RecoTLR.customiseDataRun2Common_50nsRunsAfter253000 --customise RecoHI/Configuration/customise_PPwithHI.customisePPwithHI --data --scenario pp --eventcontent RECO --no_exec
+[tuos@lxplus0059 src]$ cmsRun step3pp_FILTER_RAW2DIGI_L1Reco_RECO.py 
+
+
