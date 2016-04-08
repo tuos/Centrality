@@ -1,0 +1,14 @@
+
+File data_RAW_5EventsWithHFEnergyMissMatched.root Events 5
+Branch Name | Average Uncompressed Size (Bytes/Event) | Average Compressed Size (Bytes/Event) 
+FEDRawDataCollection_rawDataRepacker__HLT. 1.51742e+06 957008
+FEDRawDataCollection_virginRawDataRepacker__HLT. 2.17027e+07 290301
+L1GlobalTriggerObjectMapRecord_hltL1GtObjectMap__HLT. 24656.4 3305.6
+triggerTriggerEvent_hltTriggerSummaryAOD__HLT. 5500.8 1191.4
+edmTriggerResults_TriggerResults__HLT. 1003.4 497.4
+edmTriggerResults_TriggerResults__FILTER. 547.8 491.6
+EventAuxiliary 254 75.8
+EventSelections 195 39.4
+EventProductProvenance 193 34
+BranchListIndexes 142 27.2
+
