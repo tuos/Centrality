@@ -138,6 +138,7 @@ def storeCaloTowersAOD(process):
     return process
 
 
+# Add Centrality and Event Plane reconstruction in pp reco 
 def customiseRecoCentralityEP(process):
 
     process.load('RecoHI.HiCentralityAlgos.pACentrality_cfi')
