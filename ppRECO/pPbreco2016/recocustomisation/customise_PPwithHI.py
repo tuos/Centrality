@@ -141,26 +141,26 @@ def storeCaloTowersAOD(process):
 def customiseRecoCentralityEP(process):
 
     process.load('RecoHI.HiCentralityAlgos.pACentrality_cfi')
-    #process.load('RecoHI.HiCentralityAlgos.CentralityBin_cfi')
-    #process.load('RecoHI.HiEvtPlaneAlgos.HiEvtPlane_cfi')
+    process.load('RecoHI.HiCentralityAlgos.CentralityBin_cfi')
+    process.load('RecoHI.HiEvtPlaneAlgos.HiEvtPlane_cfi')
     process.pACentrality.produceHFhits = cms.bool(False)
     process.pACentrality.produceEcalhits = cms.bool(False)
     process.pACentrality.produceETmidRapidity = cms.bool(False)
     process.pACentrality.producePixelhits = cms.bool(False)
     process.pACentrality.producePixelTracks = cms.bool(False)
-    #process.centralityBin.Centrality = cms.InputTag("pACentrality") 
+    process.centralityBin.Centrality = cms.InputTag("pACentrality") 
     #process.centralityBin.centralityVariable = cms.string("HFtowersTrunc") 
     #process.centralityBin.nonDefaultGlauberModel = cms.string("HydjetDrum5")
-    #process.hiEvtPlane.vertexTag = cms.InputTag("offlinePrimaryVertices")
-    #process.hiEvtPlane.trackTag = cms.InputTag("generalTracks")
+    process.hiEvtPlane.vertexTag = cms.InputTag("offlinePrimaryVertices")
+    process.hiEvtPlane.trackTag = cms.InputTag("generalTracks")
     #process.hiEvtPlane.centralityBinTag = cms.InputTag("centralityBin","HFtowersTrunc")
     #process.hiEvtPlane.centralityVariable = cms.string("HFtowersTrunc")
     #process.hiEvtPlane.nonDefaultGlauberModel = cms.string("HydjetDrum5")
     
     process.recoCentralityEP = cms.Path(
         process.pACentrality
-        #+ process.centralityBin
-        #+ process.hiEvtPlane
+        + process.centralityBin
+        + process.hiEvtPlane
         )
 
     process.schedule.append(process.recoCentralityEP)
@@ -178,15 +178,15 @@ def storePPbAdditionalAOD(process):
         process.AODoutput.outputCommands.extend(['keep *_zdcreco_*_*'])
         process.AODoutput.outputCommands.extend(['keep ZDCDataFramesSorted_hcalDigis_*_*'])
         process.AODoutput.outputCommands.extend(['keep recoCentrality*_pACentrality_*_*'])
-        #process.AODoutput.outputCommands.extend(['keep *_centralityBin_*_*'])
-        #process.AODoutput.outputCommands.extend(['keep recoEvtPlanes_hiEvtPlane_*_*'])
+        process.AODoutput.outputCommands.extend(['keep *_centralityBin_*_*'])
+        process.AODoutput.outputCommands.extend(['keep recoEvtPlanes_hiEvtPlane_*_*'])
 
     if hasattr(process,'AODSIMoutput'):
         process.AODSIMoutput.outputCommands.extend(['keep *_zdcreco_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep ZDCDataFramesSorted_hcalDigis_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep recoCentrality*_pACentrality_*_*'])
-        #process.AODSIMoutput.outputCommands.extend(['keep *_centralityBin_*_*'])
-        #process.AODSIMoutput.outputCommands.extend(['keep recoEvtPlanes_hiEvtPlane_*_*'])
+        process.AODSIMoutput.outputCommands.extend(['keep *_centralityBin_*_*'])
+        process.AODSIMoutput.outputCommands.extend(['keep recoEvtPlanes_hiEvtPlane_*_*'])
 
     return process
 
