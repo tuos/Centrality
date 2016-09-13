@@ -150,12 +150,12 @@ def customiseRecoCentralityEP(process):
     process.pACentrality.producePixelhits = cms.bool(False)
     process.pACentrality.producePixelTracks = cms.bool(False)
     process.centralityBin.Centrality = cms.InputTag("pACentrality") 
-    process.centralityBin.centralityVariable = cms.string("HFtowersPbsideForward") 
+    process.centralityBin.centralityVariable = cms.string("HFtowersPlusTrunc") 
     process.centralityBin.nonDefaultGlauberModel = cms.string("")
     process.hiEvtPlane.vertexTag = cms.InputTag("offlinePrimaryVertices")
     process.hiEvtPlane.trackTag = cms.InputTag("generalTracks")
-    process.hiEvtPlane.centralityBinTag = cms.InputTag("centralityBin","HFtowersPbsideForward")
-    process.hiEvtPlane.centralityVariable = cms.string("HFtowersPbsideForward")
+    process.hiEvtPlane.centralityBinTag = cms.InputTag("centralityBin","HFtowersPlusTrunc")
+    process.hiEvtPlane.centralityVariable = cms.string("HFtowersPlusTrunc")
     process.hiEvtPlane.nonDefaultGlauberModel = cms.string("")
     
     process.recoCentralityEP = cms.Path(
