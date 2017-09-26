@@ -14,7 +14,6 @@ void centNpartXe(){
   TH1D *hB = new TH1D("hB","Number of Participants Distribution;B;Events",2000,-0.01,19.99);
   nt_Xe_Xe->Project("hB","B");
 
-  // Extract hNpart distribution and get bin boundaries for three centralit bins
 
   Double_t fRunningCounts=0.;
   Int_t iBin5=0;
@@ -22,10 +21,8 @@ void centNpartXe(){
   Int_t iBin15=0;
   Int_t iBin100=1;
 
-  //for (Int_t i=hB->GetNbinsX();i>=1;i--) {
   for (Int_t i=1; i<=hB->GetNbinsX(); i++) {
     fRunningCounts=fRunningCounts+hB->GetBinContent(i);
-    //    cout<<i<<": "<<fRunningCounts<<endl;
     if(fRunningCounts>=(0.05*hB->GetEntries())&&iBin5==0) {
       iBin5=i;
       cout<<"Found 5% bin boundary="<<iBin5<<", B value = "<<hB->GetBinCenter(iBin5)<<endl;
@@ -41,7 +38,6 @@ void centNpartXe(){
   }
   //cout<<"By definition 100% bin boundary="<<iBin100<<", Npart Value = "<<hNpart->GetBinCenter(iBin100)<<endl;
 
-  //hB->Draw();
 
   TH1D *hNpart05 = new TH1D("hNpart05","Number of Participants Distribution;Npart;Events",300,-0.5,299.5);
   nt_Xe_Xe->Draw("Npart>>+hNpart05","B<3.025");
