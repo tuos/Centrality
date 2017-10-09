@@ -196,16 +196,25 @@ cout<<" 0-100%    "<<hNpart0100->GetMean()<<"   "<<hNcoll0100->GetMean()<<endl;
 
 
 const int nCent=12;
+double bRanges[nCent+1]={0.0, 3.025, 4.285, 5.255, 6.065, 6.785, 7.435, 8.585, 9.595, 10.515, 11.355, 12.175, 100.0};
+
   TH1D *hEcc2[nCent];
   TH1D *hEcc3[nCent];
   TH1D *hEcc4[nCent];
   TH1D *hEcc5[nCent];
 for(int i=0; i<nCent; i++){
-  hEcc2[i] = new TH1D(Form("hEcc2_%d", i),"B Distribution;B;Events",1100,-0.05,1.05);
-  hEcc3[i] = new TH1D(Form("hEcc3_%d", i),"B Distribution;B;Events",1100,-0.05,1.05);
-  hEcc4[i] = new TH1D(Form("hEcc4_%d", i),"B Distribution;B;Events",1100,-0.05,1.05);
-  hEcc5[i] = new TH1D(Form("hEcc5_%d", i),"B Distribution;B;Events",1100,-0.05,1.05);
+  hEcc2[i] = new TH1D(Form("hEcc2_%d", i),"Ecc Distribution;Ecc;Events",1100,-0.05,1.05);
+  hEcc3[i] = new TH1D(Form("hEcc3_%d", i),"Ecc Distribution;Ecc;Events",1100,-0.05,1.05);
+  hEcc4[i] = new TH1D(Form("hEcc4_%d", i),"Ecc Distribution;Ecc;Events",1100,-0.05,1.05);
+  hEcc5[i] = new TH1D(Form("hEcc5_%d", i),"Ecc Distribution;Ecc;Events",1100,-0.05,1.05);
+
+  nt_Xe_Xe->Draw(Form("Ecc2>>+hEcc2[%d]",i),Form("B>=%f&&B<%f", bRanges[i],bRanges[i+1]));
+  nt_Xe_Xe->Draw(Form("Ecc3>>+hEcc3[%d]",i),Form("B>=%f&&B<%f", bRanges[i],bRanges[i+1]));
+  nt_Xe_Xe->Draw(Form("Ecc4>>+hEcc4[%d]",i),Form("B>=%f&&B<%f", bRanges[i],bRanges[i+1]));
+  nt_Xe_Xe->Draw(Form("Ecc5>>+hEcc5[%d]",i),Form("B>=%f&&B<%f", bRanges[i],bRanges[i+1]));
+
 }
+
 
 
 //  TCanvas *can=new TCanvas("can","can",10,10,660,510);
