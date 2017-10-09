@@ -216,7 +216,7 @@ for(int i=0; i<nCent; i++){
   nt_Xe_Xe->Draw(Form("Ecc4>>+hEcc4_%d",i),Form("B>=%f&&B<%f", bRanges[i],bRanges[i+1]));
   nt_Xe_Xe->Draw(Form("Ecc5>>+hEcc5_%d",i),Form("B>=%f&&B<%f", bRanges[i],bRanges[i+1]));
 
-  cout<<i<<"   "<<hEcc2[i]->GetMean()<<"   "<<hEcc3[i]->GetMean()<<"   "<<hEcc4[i]->GetMean()<<"   "<<hEcc5[i]->GetMean()<<endl;
+  cout<<i<<"   "<<hEcc2[i]->GetMean()<<" | "<<hEcc3[i]->GetMean()<<" | "<<hEcc4[i]->GetMean()<<" | "<<hEcc5[i]->GetMean()<<endl;
 
 }
 
@@ -239,7 +239,7 @@ for(int i=0; i<nCent5; i++){
   nt_Xe_Xe->Draw(Form("Ecc4>>+hEcc45_%d",i),Form("B>=%f&&B<%f", bRanges5[i],bRanges5[i+1]));
   nt_Xe_Xe->Draw(Form("Ecc5>>+hEcc55_%d",i),Form("B>=%f&&B<%f", bRanges5[i],bRanges5[i+1]));
 
-  cout<<i<<"   "<<hEcc25[i]->GetMean()<<"   "<<hEcc35[i]->GetMean()<<"   "<<hEcc45[i]->GetMean()<<"   "<<hEcc55[i]->GetMean()<<endl;
+  cout<<i<<"   "<<hEcc25[i]->GetMean()<<" | "<<hEcc35[i]->GetMean()<<" | "<<hEcc45[i]->GetMean()<<" | "<<hEcc55[i]->GetMean()<<endl;
 
 }
 
@@ -252,7 +252,7 @@ for(int i=0; i<nCent5; i++){
   nt_Xe_Xe->Draw(Form("Ecc3>>+hEcc30"),Form("B>=%f&&B<%f", 0.0, 100.0));
   nt_Xe_Xe->Draw(Form("Ecc4>>+hEcc40"),Form("B>=%f&&B<%f", 0.0, 100.0));
   nt_Xe_Xe->Draw(Form("Ecc5>>+hEcc50"),Form("B>=%f&&B<%f", 0.0, 100.0));
-  cout<<"0-100%   "<<hEcc20->GetMean()<<"   "<<hEcc30->GetMean()<<"   "<<hEcc40->GetMean()<<"   "<<hEcc50->GetMean()<<endl;
+  cout<<"0-100%   "<<hEcc20->GetMean()<<" | "<<hEcc30->GetMean()<<" | "<<hEcc40->GetMean()<<" | "<<hEcc50->GetMean()<<endl;
 
 cout<<endl<<hEcc25[0]->GetMean()<<endl;
 hEcc25[0]->Draw();
