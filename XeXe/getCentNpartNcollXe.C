@@ -195,8 +195,11 @@ cout<<" 50-100%    "<<hNpart50100->GetMean()<<"   "<<hNcoll50100->GetMean()<<end
 cout<<" 0-100%    "<<hNpart0100->GetMean()<<"   "<<hNcoll0100->GetMean()<<endl;
 
 
+cout << fixed << setprecision(3);
+
 const int nCent=12;
 double bRanges[nCent+1]={0.0, 3.025, 4.285, 5.255, 6.065, 6.785, 7.435, 8.585, 9.595, 10.515, 11.355, 12.175, 100.0};
+double b5Ranges[5]={0, 4.285, 7.435, 9.595, 100.0};
 
   TH1D *hEcc2[nCent];
   TH1D *hEcc3[nCent];
@@ -208,14 +211,51 @@ for(int i=0; i<nCent; i++){
   hEcc4[i] = new TH1D(Form("hEcc4_%d", i),"Ecc Distribution;Ecc;Events",1100,-0.05,1.05);
   hEcc5[i] = new TH1D(Form("hEcc5_%d", i),"Ecc Distribution;Ecc;Events",1100,-0.05,1.05);
 
-  nt_Xe_Xe->Draw(Form("Ecc2>>+hEcc2[%d]",i),Form("B>=%f&&B<%f", bRanges[i],bRanges[i+1]));
-  nt_Xe_Xe->Draw(Form("Ecc3>>+hEcc3[%d]",i),Form("B>=%f&&B<%f", bRanges[i],bRanges[i+1]));
-  nt_Xe_Xe->Draw(Form("Ecc4>>+hEcc4[%d]",i),Form("B>=%f&&B<%f", bRanges[i],bRanges[i+1]));
-  nt_Xe_Xe->Draw(Form("Ecc5>>+hEcc5[%d]",i),Form("B>=%f&&B<%f", bRanges[i],bRanges[i+1]));
+  nt_Xe_Xe->Draw(Form("Ecc2>>+hEcc2_%d",i),Form("B>=%f&&B<%f", bRanges[i],bRanges[i+1]));
+  nt_Xe_Xe->Draw(Form("Ecc3>>+hEcc3_%d",i),Form("B>=%f&&B<%f", bRanges[i],bRanges[i+1]));
+  nt_Xe_Xe->Draw(Form("Ecc4>>+hEcc4_%d",i),Form("B>=%f&&B<%f", bRanges[i],bRanges[i+1]));
+  nt_Xe_Xe->Draw(Form("Ecc5>>+hEcc5_%d",i),Form("B>=%f&&B<%f", bRanges[i],bRanges[i+1]));
+
+  cout<<i<<"   "<<hEcc2[i]->GetMean()<<"   "<<hEcc3[i]->GetMean()<<"   "<<hEcc4[i]->GetMean()<<"   "<<hEcc5[i]->GetMean()<<endl;
 
 }
 
+//other centrality ranges
+const int nCent5=4;
+double bRanges5[nCent5+1]={0.0, 4.285, 7.435, 9.595, 100.0};
 
+  TH1D *hEcc25[nCent5];
+  TH1D *hEcc35[nCent5];
+  TH1D *hEcc45[nCent5];
+  TH1D *hEcc55[nCent5];
+for(int i=0; i<nCent5; i++){
+  hEcc25[i] = new TH1D(Form("hEcc25_%d", i),"Ecc Distribution;Ecc;Events",1100,-0.05,1.05);
+  hEcc35[i] = new TH1D(Form("hEcc35_%d", i),"Ecc Distribution;Ecc;Events",1100,-0.05,1.05);
+  hEcc45[i] = new TH1D(Form("hEcc45_%d", i),"Ecc Distribution;Ecc;Events",1100,-0.05,1.05);
+  hEcc55[i] = new TH1D(Form("hEcc55_%d", i),"Ecc Distribution;Ecc;Events",1100,-0.05,1.05);
+
+  nt_Xe_Xe->Draw(Form("Ecc2>>+hEcc25_%d",i),Form("B>=%f&&B<%f", bRanges5[i],bRanges5[i+1]));
+  nt_Xe_Xe->Draw(Form("Ecc3>>+hEcc35_%d",i),Form("B>=%f&&B<%f", bRanges5[i],bRanges5[i+1]));
+  nt_Xe_Xe->Draw(Form("Ecc4>>+hEcc45_%d",i),Form("B>=%f&&B<%f", bRanges5[i],bRanges5[i+1]));
+  nt_Xe_Xe->Draw(Form("Ecc5>>+hEcc55_%d",i),Form("B>=%f&&B<%f", bRanges5[i],bRanges5[i+1]));
+
+  cout<<i<<"   "<<hEcc25[i]->GetMean()<<"   "<<hEcc35[i]->GetMean()<<"   "<<hEcc45[i]->GetMean()<<"   "<<hEcc55[i]->GetMean()<<endl;
+
+}
+
+//other centrality ranges
+  TH1D *hEcc20 = new TH1D(Form("hEcc20"),"Ecc Distribution;Ecc;Events",1100,-0.05,1.05);
+  TH1D *hEcc30 = new TH1D(Form("hEcc30"),"Ecc Distribution;Ecc;Events",1100,-0.05,1.05);
+  TH1D *hEcc40 = new TH1D(Form("hEcc40"),"Ecc Distribution;Ecc;Events",1100,-0.05,1.05);
+  TH1D *hEcc50 = new TH1D(Form("hEcc50"),"Ecc Distribution;Ecc;Events",1100,-0.05,1.05);
+  nt_Xe_Xe->Draw(Form("Ecc2>>+hEcc20"),Form("B>=%f&&B<%f", 0.0, 100.0));
+  nt_Xe_Xe->Draw(Form("Ecc3>>+hEcc30"),Form("B>=%f&&B<%f", 0.0, 100.0));
+  nt_Xe_Xe->Draw(Form("Ecc4>>+hEcc40"),Form("B>=%f&&B<%f", 0.0, 100.0));
+  nt_Xe_Xe->Draw(Form("Ecc5>>+hEcc50"),Form("B>=%f&&B<%f", 0.0, 100.0));
+  cout<<"0-100%   "<<hEcc20->GetMean()<<"   "<<hEcc30->GetMean()<<"   "<<hEcc40->GetMean()<<"   "<<hEcc50->GetMean()<<endl;
+
+cout<<endl<<hEcc25[0]->GetMean()<<endl;
+hEcc25[0]->Draw();
 
 //  TCanvas *can=new TCanvas("can","can",10,10,660,510);
 //hB->Draw();
