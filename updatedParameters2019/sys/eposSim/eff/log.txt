@@ -1,0 +1,7 @@
+
+Glauber <hf> when using different trigger eff.
+100%: <hf> = 1335; 
+97%: <hf> = 1376; 
+99%: <hf> = 1348;
+101%: <hf> = 1321; 
+
