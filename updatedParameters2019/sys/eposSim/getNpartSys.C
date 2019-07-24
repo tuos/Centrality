@@ -8,15 +8,15 @@ else
 
 void getNpartSys(){
 
-const int nRange = 49;
-
-int centL[nRange] = {0,   0,   0,   0,   0,   0,   0,   5,   10,  10,
-                     10,  15,  20,  20,  20,  25,  30,  30,  30,  30,
+const int nRange = 51;
+//                   1,   2,   3,   4,   5,   6,   7,   8,   9,   10,  11, | // # bins 
+int centL[nRange] = {0,   0,   0,   0,   0,   0,   0,   0,   5,   10,  10,
+                     10,  15,  20,  20,  20,  25,  30,  30,  30,  30,  30,
                      35,  40,  40,  40,  40,  45,  50,  50,  50,  50,
                      50,  50,  55,  60,  60,  60,  65,  70,  70,  70,
                      70,  75,  80,  80,  80,  85,  90,  90,  95};
-int centH[nRange] = {5,   10,  20,  30,  50,  80,  100, 10,  15,  20,
-                     30,  20,  25,  30,  40,  30,  35,  40,  50,  100,
+int centH[nRange] = {5,   10,  20,  30,  50,  80,  90,  100, 10,  15,  20,
+                     30,  20,  25,  30,  40,  30,  35,  40,  50,  90,  100,
                      40,  45,  50,  60,  100, 50,  55,  60,  70,  80,
                      90,  100, 60,  65,  70,  80,  70,  75,  80,  90,
                      100, 80,  85,  90,  100, 90,  95,  100, 100};
@@ -52,6 +52,10 @@ for(int i=1; i<7; i++){
 cout << fixed << setprecision(2);
 double npart[nRange]; double sys[8][nRange];
 double npartSmeared[nRange];
+
+char values_string[nRange][200];
+char values_string_int[nRange][200];
+
 for(int i=0; i<nRange; i++){
     npart[i]=0;
     npartSmeared[i]=0;
@@ -77,7 +81,11 @@ for(int i=0; i<nRange; i++){
   //double sysTotal = sqrt(max(sys[0][i]-npart[i], sys[1][i]-npart[i])*max(sys[0][i]-npart[i], sys[1][i]-npart[i]) + max(sys[2][i]-npart[i], sys[3][i]-npart[i])*max(sys[2][i]-npart[i], sys[3][i]-npart[i]) + 0.0 );
 
 //cout<<centL[i]<<"  "<<centH[i]<<"  "<<npart[i]<<"  "<<sysTotal<<"  "<<sysTotal*1.0/npart[i]<<endl;
-printf("| %d-%d%%|  %.4g |  %.3g | %.2g | \n",centL[i],centH[i],npartSmeared[i],sysTotal,sysTotal*100.0/npartSmeared[i]);
+sprintf(values_string[i], "%#.4g", npartSmeared[i]);
+sprintf(values_string_int[i], "%d", int( atof(values_string[i]) ));
+printf("| %d-%d%%|  %#.4g |  %#.*f | %.2g | \n",centL[i],centH[i],npartSmeared[i],    strlen(values_string[i])-strlen(values_string_int[i])-1,sysTotal     ,sysTotal*100.0/npartSmeared[i]);
+
+//printf("| %d-%d%%|  %#.4g |  %.1f | %.2g | \n",centL[i],centH[i],npartSmeared[i],sysTotal,sysTotal*100.0/npartSmeared[i]);
 //printf("%d %d  %.4g   %.3g  %.2g  \n",centL[i],centH[i],npartSmeared[i],sysTotal,sysTotal*100.0/npart[i]);
 ///printf("| %d-%d%%|  %.4g |  %.4g |  %.3g | %.2g | \n",centL[i],centH[i],npart[i],npartSmeared[i],sysTotal,sysTotal*100.0/npartSmeared[i]);
 
@@ -98,6 +106,7 @@ printf("| %d-%d%%|  %.4g |  %.3g | %.2g | \n",centL[i],centH[i],npartSmeared[i],
     cout<<i<<"   "<<fabs(sys[0][i]-sys[1][i])*100.0/2/npartSmeared[i]<<"   "<<fabs(sys[2][i]-sys[3][i])*100.0/2/npartSmeared[i]<<"   "<<(sys[4][i]*1.0)/npartSmeared[i]<<"   "<<sysTotal*100.0/npartSmeared[i]<<endl;
 
   }
+
 
 
 }
