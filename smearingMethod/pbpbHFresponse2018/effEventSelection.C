@@ -35,9 +35,11 @@ if(1){
 if(1){
    // for 98% eff   
    //TF1 *expfun98 = new TF1("expfun98", "1-exp(-0.079*x*x-0.1)", 0, 100);
-   TF1 *expfun98 = new TF1("expfun98", "1.0/3.14159*TMath::ATan(3.1*(x-12.35075))+0.5", 0, 100);
+   //TF1 *expfun98 = new TF1("expfun98", "1.0/3.14159*TMath::ATan(3.1*(x-12.35075))+0.5", 0, 100);
+   // 97.5% eff
+   TF1 *expfun975 = new TF1("expfun975", "1.0/3.14159*TMath::ATan(2.8*(x-12.72743))+0.5", 0, 100);
    for(int i = 1; i <= 800; i++){
-     effHist[2]->SetBinContent(i, expfun98->Eval(effHist[2]->GetBinCenter(i)));
+     effHist[2]->SetBinContent(i, expfun975->Eval(effHist[2]->GetBinCenter(i)));
    }
    tmp2->Multiply(hfhist,effHist[2]);
    cout<<"eff in percent = "<<tmp2->Integral(1, 60000)/hfhist->Integral(1, 60000)*100.<<"%"<<endl;

@@ -25,8 +25,8 @@ TH2D * HF_vs_Npart[nhist];
 TH2D * Npix_vs_Npart[nhist];
 TH2D * Npix_vs_HF;
 
- //TFile * infile = TFile::Open("/store/user/tuos/PbPbSimulation2018/HiForest_MC_EposLHC_2018_5p02TeV_merged.root");  // EPOS
- TFile * infile = TFile::Open("/store/user/tuos/PbPbSimulation2018/HiForest_MC_Hydjet_Drum5F_merged.root");  // HYDJET
+ TFile * infile = TFile::Open("/store/user/tuos/PbPbSimulation2018/HiForest_MC_EposLHC_2018_5p02TeV_merged.root");  // EPOS
+ //TFile * infile = TFile::Open("/store/user/tuos/PbPbSimulation2018/HiForest_MC_Hydjet_Drum5F_merged.root");  // HYDJET
 
  //TTree * tskim = (TTree *) infile->Get("skimanalysis/HltTree");
  //int selHFp;	tskim->SetBranchAddress("phfPosFilter1", &selHFp);
@@ -104,7 +104,8 @@ TH2D * Npix_vs_HF;
 
  }// end of event loop
 
-  TFile * outfile = new TFile("out/ForSmearingHydjetDrum5F_2018Response5020_d20190805_v1.root","recreate");
+  //TFile * outfile = new TFile("out/ForSmearingHydjetDrum5F_2018Response5020_d20190805_v1.root","recreate");
+  TFile * outfile = new TFile("out/ForSmearingEposLHC_2018Response5020_d20190806_v1.root","recreate");
   //TFile * outfile = new TFile("out/ForSmearingHydjetResponse5020_d20160324_v1.root","recreate");
   TDirectory * dir = outfile->mkdir("SmearingHist");
   outfile->cd();
