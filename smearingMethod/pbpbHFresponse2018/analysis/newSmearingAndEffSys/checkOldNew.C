@@ -1,14 +1,52 @@
-void eposVShydjet(){
+void checkOldNew(){
   const int nBins = 20;
   double sys1[2][nBins];
   double sys2[2][nBins];
   double sys3[2][nBins];
   double sysT[2][nBins];
   double tmp;
-  double sys1New[2][nBins];
-  double sys2New[2][nBins];
-  double sys3New[2][nBins];
-  double sysTNew[2][nBins];
+
+  TH1D *hSys[2][4];
+  ifstream inNpart;
+  inNpart.open("../npart_sys.txt");
+  for(int i=0; i<nBins; i++){
+    inNpart>>tmp;
+    inNpart>>sys1[0][i];
+    inNpart>>sys2[0][i];
+    inNpart>>sys3[0][i];
+    inNpart>>sysT[0][i];
+    //sysT[0][i] = sqrt(sys1[0][i]*sys1[0][i]+sys2[0][i]*sys2[0][i]+sys3[0][i]*sys3[0][i]);
+  }
+  ifstream inNcoll;
+  inNcoll.open("../ncoll_sys.txt");
+  for(int i=0; i<nBins; i++){
+    inNcoll>>tmp;
+    inNcoll>>sys1[1][i];
+    inNcoll>>sys2[1][i];
+    inNcoll>>sys3[1][i];
+    inNcoll>>sysT[1][i];
+    //sysT[1][i] = sqrt(sys1[1][i]*sys1[1][i]+sys2[1][i]*sys2[1][i]+sys3[1][i]*sys3[1][i]);
+  }
+  
+  for(int i=0; i<4; i++){
+    hSys[0][i] = new TH1D(Form("hsys_npart_%d",i),"",20,0,100);
+    hSys[1][i] = new TH1D(Form("hsys_ncoll_%d",i),"",20,0,100);
+  }
+  for(int i=0; i<nBins; i++){
+    hSys[0][0]->SetBinContent(i+1, sys1[0][i]);
+    hSys[0][1]->SetBinContent(i+1, sys2[0][i]);
+    hSys[0][2]->SetBinContent(i+1, sys3[0][i]);
+    hSys[0][3]->SetBinContent(i+1, sysT[0][i]);
+
+    hSys[1][0]->SetBinContent(i+1, sys1[1][i]);
+    hSys[1][1]->SetBinContent(i+1, sys2[1][i]);
+    hSys[1][2]->SetBinContent(i+1, sys3[1][i]);
+    hSys[1][3]->SetBinContent(i+1, sysT[1][i]);
+  }  
+
+//int rebins = 10;
+//hSys[0][0]->Rebin(rebins);
+//hSys[0][0]->Scale(1.0/rebins);
 
   double oldNpart[nBins];
   double oldNcoll[nBins];
@@ -22,103 +60,39 @@ void eposVShydjet(){
   TH1D *hOldNcoll = new TH1D("hOldNcoll","",20,0,100);
   TH1D *hNewNpart = new TH1D("hNewNpart","",20,0,100);
   TH1D *hNewNcoll = new TH1D("hNewNcoll","",20,0,100);
-
-
-  TH1D *hSys[2][4];
-  TH1D *hSysNew[2][4];
-  ifstream inNpart;
-  inNpart.open("./npart_2018epos100eff.txt");
+  ifstream oldFile;
+  oldFile.open("old.txt");
   for(int i=0; i<nBins; i++){
-    inNpart>>tmp;
-    inNpart>>tmp;
-    inNpart>>oldNpart[i];
-    inNpart>>sys1[0][i];
-    inNpart>>sys2[0][i];
-    inNpart>>sys3[0][i];
-    inNpart>>sysT[0][i];
-    //sysT[0][i] = sqrt(sys1[0][i]*sys1[0][i]+sys2[0][i]*sys2[0][i]+sys3[0][i]*sys3[0][i]);
-  }
-  ifstream inNcoll;
-  inNcoll.open("./ncoll_2018epos100eff.txt");
-  for(int i=0; i<nBins; i++){
-    inNcoll>>tmp;
-    inNcoll>>tmp;
-    inNcoll>>oldNcoll[i];
-    inNcoll>>sys1[1][i];
-    inNcoll>>sys2[1][i];
-    inNcoll>>sys3[1][i];
-    inNcoll>>sysT[1][i];
-    //sysT[1][i] = sqrt(sys1[1][i]*sys1[1][i]+sys2[1][i]*sys2[1][i]+sys3[1][i]*sys3[1][i]);
-  }
- 
-  ifstream inNpartNew;
-  inNpartNew.open("./npart_2018hydjet100eff.txt");
-  for(int i=0; i<nBins; i++){
-    inNpartNew>>tmp;
-    inNpartNew>>tmp;
-    inNpartNew>>newNpart[i];
-    inNpartNew>>sys1New[0][i];
-    inNpartNew>>sys2New[0][i];
-    inNpartNew>>sys3New[0][i];
-    inNpartNew>>sysTNew[0][i];
-    //sysT[0][i] = sqrt(sys1[0][i]*sys1[0][i]+sys2[0][i]*sys2[0][i]+sys3[0][i]*sys3[0][i]);
-  }
-  ifstream inNcollNew; 
-  inNcollNew.open("./ncoll_2018hydjet100eff.txt");
-  for(int i=0; i<nBins; i++){
-    inNcollNew>>tmp;
-    inNcollNew>>tmp;
-    inNcollNew>>newNcoll[i];
-    inNcollNew>>sys1New[1][i];
-    inNcollNew>>sys2New[1][i];
-    inNcollNew>>sys3New[1][i];
-    inNcollNew>>sysTNew[1][i];
-    //sysT[1][i] = sqrt(sys1[1][i]*sys1[1][i]+sys2[1][i]*sys2[1][i]+sys3[1][i]*sys3[1][i]);
-  } 
-
-  for(int i=0; i<4; i++){
-    hSys[0][i] = new TH1D(Form("hsys_npart_%d",i),"",20,0,100);
-    hSys[1][i] = new TH1D(Form("hsys_ncoll_%d",i),"",20,0,100);
-    hSysNew[0][i] = new TH1D(Form("hsysnew_npart_%d",i),"",20,0,100);
-    hSysNew[1][i] = new TH1D(Form("hsysnew_ncoll_%d",i),"",20,0,100);
-  }
-  for(int i=0; i<nBins; i++){
-    hSys[0][0]->SetBinContent(i+1, sys1[0][i]);
-    hSys[0][1]->SetBinContent(i+1, sys2[0][i]);
-    hSys[0][2]->SetBinContent(i+1, sys3[0][i]);
-    hSys[0][3]->SetBinContent(i+1, sysT[0][i]);
-
-    hSys[1][0]->SetBinContent(i+1, sys1[1][i]);
-    hSys[1][1]->SetBinContent(i+1, sys2[1][i]);
-    hSys[1][2]->SetBinContent(i+1, sys3[1][i]);
-    hSys[1][3]->SetBinContent(i+1, sysT[1][i]);
-
-    hSysNew[0][0]->SetBinContent(i+1, sys1New[0][i]);
-    hSysNew[0][1]->SetBinContent(i+1, sys2New[0][i]);
-    hSysNew[0][2]->SetBinContent(i+1, sys3New[0][i]);
-    hSysNew[0][3]->SetBinContent(i+1, sysTNew[0][i]);
-
-    hSysNew[1][0]->SetBinContent(i+1, sys1New[1][i]);
-    hSysNew[1][1]->SetBinContent(i+1, sys2New[1][i]);
-    hSysNew[1][2]->SetBinContent(i+1, sys3New[1][i]);
-    hSysNew[1][3]->SetBinContent(i+1, sysTNew[1][i]);
-  }  
-
-//int rebins = 10;
-//hSys[0][0]->Rebin(rebins);
-//hSys[0][0]->Scale(1.0/rebins);
-
-  for(int i=0; i<nBins; i++){
+    oldFile>>tmp; 
+    oldFile>>tmp;
+    oldFile>>oldNpart[i];
+    oldFile>>oldNcoll[i];
     hOldNpart->SetBinContent(i+1, oldNpart[i]);
     hOldNcoll->SetBinContent(i+1, oldNcoll[i]);
   }
+  ifstream newFile;
+  newFile.open("new.txt");
   for(int i=0; i<nBins; i++){
+    newFile>>newNpart[i];
+    newFile>>newNcoll[i];
     hNewNpart->SetBinContent(i+1, newNpart[i]);
     hNewNcoll->SetBinContent(i+1, newNcoll[i]);
   }
   hNewNpart->Divide(hOldNpart);
   hNewNcoll->Divide(hOldNcoll);
 
+  ifstream errNpartFile;
+  errNpartFile.open("errNpart.txt");
+  for(int i=0; i<nBins; i++){
+    errNpartFile>>errNpartL[i];
+    errNpartFile>>errNpartH[i];
+  }
+  ifstream errNcollFile;
+  errNcollFile.open("errNcoll.txt");
+  for(int i=0; i<nBins; i++){
+    errNcollFile>>errNcollL[i];
+    errNcollFile>>errNcollH[i];
+  }
   double x[nBins];
   double y[nBins];
   double exl[nBins];
@@ -130,8 +104,8 @@ void eposVShydjet(){
     y[i] = 1.0;
     exl[i]=0;
     exh[i]=0;
-    eyl[i]= sysT[0][i]*0.01;
-    eyh[i]= sysT[0][i]*0.01;
+    eyl[i]= errNpartL[i]*0.01;
+    eyh[i]= errNpartH[i]*0.01;
 cout<<i<<"  "<<eyl[i]<<"  "<<eyh[i]<<endl;
   }
    gr = new TGraphAsymmErrors(nBins,x,y,exl,exh,eyl,eyh);
@@ -151,8 +125,8 @@ cout<<i<<"  "<<eyl[i]<<"  "<<eyh[i]<<endl;
     y2[i] = 1.0;
     exl2[i]=0;
     exh2[i]=0;
-    eyl2[i]= sysT[1][i]*0.01;
-    eyh2[i]= sysT[1][i]*0.01;
+    eyl2[i]= errNcollL[i]*0.01;
+    eyh2[i]= errNcollH[i]*0.01;
   }
 
 
@@ -199,8 +173,8 @@ cout<<i<<"  "<<eyl[i]<<"  "<<eyh[i]<<endl;
   leg0->SetBorderSize(0);
   leg0->SetTextFont(42);
   leg0->SetTextSize(0.048);
-  leg0->AddEntry(hNewNpart, "HYDJET/EPOS smearing", "p");
-  leg0->AddEntry(gr, "Uncertainty (Glauber only)", "p");
+  leg0->AddEntry(hNewNpart, "Updated/Previous", "p");
+  leg0->AddEntry(gr, "Previous uncertainty", "p");
   leg0->Draw();
 
   TLatex *tex1= new TLatex(12,1.15,"N_{part}");
@@ -252,9 +226,9 @@ cout<<i<<"  "<<eyl[i]<<"  "<<eyh[i]<<endl;
   //tex1->SetTextFont(42);
   tex1->Draw();
 
-  c1->SaveAs("plot_checkSmearingModels.pdf");
-  c1->SaveAs("plot_checkSmearingModels.png");
-  c1->SaveAs("plot_checkSmearingModels.C");
+  c1->SaveAs("plot_checkOldNew.pdf");
+  c1->SaveAs("plot_checkOldNew.png");
+  c1->SaveAs("plot_checkOldNew.C");
 
 }
 

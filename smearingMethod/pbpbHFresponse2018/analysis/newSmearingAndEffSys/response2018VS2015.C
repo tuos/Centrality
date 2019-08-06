@@ -1,4 +1,4 @@
-void eposVShydjet(){
+void response2018VS2015(){
   const int nBins = 20;
   double sys1[2][nBins];
   double sys2[2][nBins];
@@ -27,7 +27,7 @@ void eposVShydjet(){
   TH1D *hSys[2][4];
   TH1D *hSysNew[2][4];
   ifstream inNpart;
-  inNpart.open("./npart_2018epos100eff.txt");
+  inNpart.open("./npart_2015epos100eff.txt");
   for(int i=0; i<nBins; i++){
     inNpart>>tmp;
     inNpart>>tmp;
@@ -39,7 +39,7 @@ void eposVShydjet(){
     //sysT[0][i] = sqrt(sys1[0][i]*sys1[0][i]+sys2[0][i]*sys2[0][i]+sys3[0][i]*sys3[0][i]);
   }
   ifstream inNcoll;
-  inNcoll.open("./ncoll_2018epos100eff.txt");
+  inNcoll.open("./ncoll_2015epos100eff.txt");
   for(int i=0; i<nBins; i++){
     inNcoll>>tmp;
     inNcoll>>tmp;
@@ -52,7 +52,7 @@ void eposVShydjet(){
   }
  
   ifstream inNpartNew;
-  inNpartNew.open("./npart_2018hydjet100eff.txt");
+  inNpartNew.open("./npart_2018epos100eff.txt");
   for(int i=0; i<nBins; i++){
     inNpartNew>>tmp;
     inNpartNew>>tmp;
@@ -64,7 +64,7 @@ void eposVShydjet(){
     //sysT[0][i] = sqrt(sys1[0][i]*sys1[0][i]+sys2[0][i]*sys2[0][i]+sys3[0][i]*sys3[0][i]);
   }
   ifstream inNcollNew; 
-  inNcollNew.open("./ncoll_2018hydjet100eff.txt");
+  inNcollNew.open("./ncoll_2018epos100eff.txt");
   for(int i=0; i<nBins; i++){
     inNcollNew>>tmp;
     inNcollNew>>tmp;
@@ -199,7 +199,7 @@ cout<<i<<"  "<<eyl[i]<<"  "<<eyh[i]<<endl;
   leg0->SetBorderSize(0);
   leg0->SetTextFont(42);
   leg0->SetTextSize(0.048);
-  leg0->AddEntry(hNewNpart, "HYDJET/EPOS smearing", "p");
+  leg0->AddEntry(hNewNpart, "2018/2015 HF response", "p");
   leg0->AddEntry(gr, "Uncertainty (Glauber only)", "p");
   leg0->Draw();
 
@@ -252,9 +252,9 @@ cout<<i<<"  "<<eyl[i]<<"  "<<eyh[i]<<endl;
   //tex1->SetTextFont(42);
   tex1->Draw();
 
-  c1->SaveAs("plot_checkSmearingModels.pdf");
-  c1->SaveAs("plot_checkSmearingModels.png");
-  c1->SaveAs("plot_checkSmearingModels.C");
+  c1->SaveAs("plot_checkresponse2018VS2015.pdf");
+  c1->SaveAs("plot_checkresponse2018VS2015.png");
+  c1->SaveAs("plot_checkresponse2018VS2015.C");
 
 }
 

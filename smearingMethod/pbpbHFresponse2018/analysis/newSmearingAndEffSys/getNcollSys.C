@@ -28,7 +28,10 @@ hNpartValues[4] = (TH1D*)inFile4->Get("hNcollCent");
 
 //TFile* inFile7 = new TFile("../default_glauber_smeared_2018hf.root");
 //TFile* inFile7 = new TFile("../default_glauber_smeared_2018hf_hydjet.root");
-TFile* inFile7 = new TFile("../default_glauber_smeared_2018hf_98eff.root");
+//TFile* inFile7 = new TFile("../default_glauber_smeared_2018hf_975eff.root");
+// 2015 HF response
+TFile* inFile7 = new TFile("../../eposSim/default_glauber_smeared.root");
+
 hNpartValues[7] = (TH1D*)inFile7->Get("hNcollCent");
 
 ifstream inFileTxt;

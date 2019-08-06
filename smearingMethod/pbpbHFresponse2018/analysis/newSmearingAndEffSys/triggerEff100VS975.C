@@ -52,7 +52,7 @@ void triggerEff100VS975(){
   }
  
   ifstream inNpartNew;
-  inNpartNew.open("./npart_2018epos98eff.txt");
+  inNpartNew.open("./npart_2018epos975eff.txt");
   for(int i=0; i<nBins; i++){
     inNpartNew>>tmp;
     inNpartNew>>tmp;
@@ -64,7 +64,7 @@ void triggerEff100VS975(){
     //sysT[0][i] = sqrt(sys1[0][i]*sys1[0][i]+sys2[0][i]*sys2[0][i]+sys3[0][i]*sys3[0][i]);
   }
   ifstream inNcollNew; 
-  inNcollNew.open("./ncoll_2018epos98eff.txt");
+  inNcollNew.open("./ncoll_2018epos975eff.txt");
   for(int i=0; i<nBins; i++){
     inNcollNew>>tmp;
     inNcollNew>>tmp;
@@ -199,7 +199,7 @@ cout<<i<<"  "<<eyl[i]<<"  "<<eyh[i]<<endl;
   leg0->SetBorderSize(0);
   leg0->SetTextFont(42);
   leg0->SetTextSize(0.048);
-  leg0->AddEntry(hNewNpart, "Trigger Eff. 98%/100%", "p");
+  leg0->AddEntry(hNewNpart, "Trigger Eff. 97.5%/100%", "p");
   leg0->AddEntry(gr, "Uncertainty (Glauber only)", "p");
   leg0->Draw();
 
