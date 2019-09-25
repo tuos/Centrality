@@ -1,0 +1,8 @@
+
+Sep 25, 2019: 
+1. the default model is hydjet now.
+2. the density sys: Ncoll and TAA are the same
+
+
+
+
