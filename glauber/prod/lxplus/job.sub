@@ -1,0 +1,7 @@
+executable            = exeJob.sh
+arguments             = $(ClusterId) $(ProcId)
+output                = ./exeJob.$(ClusterId).$(ProcId).out
+error                 = ./exeJob.$(ClusterId).$(ProcId).err
+log                   = ./exeJob.$(ClusterId).log
+queue
+

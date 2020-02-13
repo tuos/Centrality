@@ -1,0 +1,26 @@
+cd /afs/cern.ch/user/t/tuos/work/private/CMSSW_7_4_0_pre5/src
+cd /afs/cern.ch/user/t/tuos/work/private/CMSSW_10_1_5/src
+cmsenv
+cd /afs/cern.ch/user/t/tuos/work/private/Glauber2016/version3/code/v31/ppb/default
+
+[tuos@lxplus000 code]$ root -l
+root [0] gSystem->Load("libMathMore")
+(int)0
+root [1] .L runglauber_v3.1.C+
+root [2] runAndSaveNtuple(1000000,"p","Pbpnrw",72.5,-1,0.4,-1,-1,"glauber_pPbpnrw_default_1M.root")
+
+=====
+  bsub -R "pool>5000" -M 3000000 -q 1nd -J job1 < /afs/cern.ch/user/t/tuos/work/private/Glauber2016/version3/code/v31/ppb/default/exeJob.sh
+
+=====
+with SL6 service ended, the bsub job submission is also phased out, need to use HTCondor.
+=====
+Example: https://batchdocs.web.cern.ch/local/quick.html
+---
+condor_submit job.sub 
+---
+condor_q -nobatch
+
+--- End for trying 8.16 TeV pPb Glauber calculation at lxplus
+
+
