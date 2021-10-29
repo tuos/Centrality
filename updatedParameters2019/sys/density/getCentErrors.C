@@ -2,23 +2,23 @@ void getCentErrors(){
 
   const int nFiles = 100;
   const int nBins = 200;
-  const int nRange = 49;
-int centL[nRange] = {0,   0,   0,   0,   0,   0,   0,   5,   10,  10,
-                     10,  15,  20,  20,  20,  25,  30,  30,  30,  30,
+const int nRange = 52; //Oct 28, 2021
+//                   1,   2,   3,   4,   5,   6,   7,   8,   9,   10,  11, | // # bins 
+int centL[nRange] = {0,   0,   0,   0,   0,   0,   0,   0,   5,   10,  10,
+                     10,  15,  20,  20,  20,  20,  25,  30,  30,  30,  30,  30,
                      35,  40,  40,  40,  40,  45,  50,  50,  50,  50,
                      50,  50,  55,  60,  60,  60,  65,  70,  70,  70,
                      70,  75,  80,  80,  80,  85,  90,  90,  95};
-int centH[nRange] = {5,   10,  20,  30,  50,  80,  100, 10,  15,  20,
-                     30,  20,  25,  30,  40,  30,  35,  40,  50,  100,
+int centH[nRange] = {5,   10,  20,  30,  50,  80,  90,  100, 10,  15,  20,
+                     30,  20,  25,  30,  40,  90,  30,  35,  40,  50,  90,  100,
                      40,  45,  50,  60,  100, 50,  55,  60,  70,  80,
                      90,  100, 60,  65,  70,  80,  70,  75,  80,  90,
                      100, 80,  85,  90,  100, 90,  95,  100, 100};
 
-
   ifstream inFile;
   const char * inFileName;
   char fileDirName[251];
-  sprintf(fileDirName,"/Users/shengquantuo/Desktop/SDM/backfiles/glauberv2/tglaubermc/newPbPb5TeV/sys/density");
+  sprintf(fileDirName,"/Users/shengquantuo/Desktop/MF/SDM/backfiles/glauberv2/tglaubermc/newPbPb5TeV/sys/density");
   double tmp;
   double npart[nBins], ncoll[nBins];
   double npartAve[nRange], ncollAve[nRange];

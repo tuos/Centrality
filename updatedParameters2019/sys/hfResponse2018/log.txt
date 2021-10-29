@@ -1,8 +1,15 @@
 
 Sep 25, 2019: 
 1. the default model is hydjet now.
-2. the density sys: Ncoll and TAA are the same
+2. the density sys: Ncall and TAA are the same
 
-
+Oct 28, 2021:
+Adding 20-90% centrality bin,
+1. edit ../density/getCentErrors.C to add the new bin and produce new file ../density/output_cent_err.txt
+2. edit ./modelSys/modelSysEposHydjet.C to add the new bin and produce new sys file ./modelSys/output_cent_err_model.txt
+3. edit getNpartSys.C to add the new bin and run it to produce the final table for Npart
+4. edit getNcollSys.C to add the new bin and run it to produce the final table for Ncoll
+5. edit getTAASys.C to add the new bin and run it to produce the final table for TAA
+(laptop: /Users/shengquantuo/Desktop/MF/SDM/backfiles/glauberv2/tglaubermc/newPbPb5TeV/sys)
 
 
