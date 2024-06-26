@@ -1,7 +1,7 @@
 void npart1D10Cent()
 {
 //=========Macro generated from canvas: c1/c1
-//=========  (Wed Jun 26 15:32:42 2024) by ROOT version6.10/09
+//=========  (Wed Jun 26 15:51:23 2024) by ROOT version6.10/09
    TCanvas *c1 = new TCanvas("c1", "c1",1,23,400,350);
    gStyle->SetOptStat(0);
    c1->Range(0,0,1,1);
@@ -1125,7 +1125,7 @@ void npart1D10Cent()
    tex->SetTextSize(0.04);
    tex->SetLineWidth(2);
    tex->Draw();
-      tex = new TLatex(113.42,0.0178,"HYDJET PbPb #sqrt{s_{NN}} = 5.02 TeV Smearing");
+      tex = new TLatex(113.42,0.0178,"HYDJET PbPb #sqrt{s_{NN}} = 5.36 TeV Smearing");
    tex->SetTextFont(42);
    tex->SetTextSize(0.04);
    tex->SetLineWidth(2);

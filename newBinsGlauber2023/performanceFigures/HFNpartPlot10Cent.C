@@ -126,7 +126,7 @@ npartvshf[i]->Draw("box same");
     tex11->SetTextSize(0.04);
     tex11->SetTextFont(42);
     tex11->Draw();
-    TLatex *tex12= new TLatex(129.,18.0328,"HYDJET PbPb #sqrt{s_{NN}} = 5.02 TeV Smearing");
+    TLatex *tex12= new TLatex(129.,18.0328,"HYDJET PbPb #sqrt{s_{NN}} = 5.36 TeV Smearing");
     tex12->SetTextColor(1);
     tex12->SetTextSize(0.04);
     tex12->SetTextFont(42);
