@@ -1,0 +1,13 @@
+executable            = exeJob.sh
+arguments             = $(ClusterId) $(ProcId)
+output                = output_sub_glauber.$(ClusterId).$(ProcId).out
+error                 = error_sub_glauber.$(ClusterId).$(ProcId).err
+log                   = log_sub_glauber.$(ClusterId).log
+request_cpus          = 1
+request_memory        = 2GB
++MaxRuntime           = 48*60*60
+#+JobFlavour          = "tomorrow"
+
+queue
+
+
